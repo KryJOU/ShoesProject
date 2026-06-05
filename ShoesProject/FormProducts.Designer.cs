@@ -41,6 +41,7 @@
             // 
             dgvProducts.AllowUserToAddRows = false;
             dgvProducts.AllowUserToDeleteRows = false;
+            dgvProducts.Anchor = AnchorStyles.Left;
             dgvProducts.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvProducts.BackgroundColor = Color.White;
             dgvProducts.BorderStyle = BorderStyle.None;
@@ -53,7 +54,6 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvProducts.DefaultCellStyle = dataGridViewCellStyle1;
-            dgvProducts.Dock = DockStyle.Bottom;
             dgvProducts.Location = new Point(0, 46);
             dgvProducts.MultiSelect = false;
             dgvProducts.Name = "dgvProducts";
