@@ -32,9 +32,9 @@
             panelTop = new Panel();
             lblUserName = new Label();
             btn_logout = new Button();
-            dgvProducts = new DataGridView();
+            dgvOrders = new DataGridView();
             panelTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvProducts).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOrders).BeginInit();
             SuspendLayout();
             // 
             // panelTop
@@ -73,15 +73,15 @@
             btn_logout.UseVisualStyleBackColor = false;
             btn_logout.Click += btn_logout_Click;
             // 
-            // dgvProducts
+            // dgvOrders
             // 
-            dgvProducts.AllowUserToAddRows = false;
-            dgvProducts.AllowUserToDeleteRows = false;
-            dgvProducts.Anchor = AnchorStyles.Left;
-            dgvProducts.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dgvProducts.BackgroundColor = Color.White;
-            dgvProducts.BorderStyle = BorderStyle.None;
-            dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOrders.AllowUserToAddRows = false;
+            dgvOrders.AllowUserToDeleteRows = false;
+            dgvOrders.Anchor = AnchorStyles.Left;
+            dgvOrders.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvOrders.BackgroundColor = Color.White;
+            dgvOrders.BorderStyle = BorderStyle.None;
+            dgvOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Window;
             dataGridViewCellStyle1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -89,30 +89,30 @@
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvProducts.DefaultCellStyle = dataGridViewCellStyle1;
-            dgvProducts.Location = new Point(0, 46);
-            dgvProducts.MultiSelect = false;
-            dgvProducts.Name = "dgvProducts";
-            dgvProducts.ReadOnly = true;
-            dgvProducts.RowHeadersVisible = false;
-            dgvProducts.RowHeadersWidth = 51;
-            dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvProducts.Size = new Size(982, 607);
-            dgvProducts.TabIndex = 4;
-            dgvProducts.CellContentClick += dgvProducts_CellContentClick;
+            dgvOrders.DefaultCellStyle = dataGridViewCellStyle1;
+            dgvOrders.Location = new Point(0, 46);
+            dgvOrders.MultiSelect = false;
+            dgvOrders.Name = "dgvOrders";
+            dgvOrders.ReadOnly = true;
+            dgvOrders.RowHeadersVisible = false;
+            dgvOrders.RowHeadersWidth = 51;
+            dgvOrders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvOrders.Size = new Size(982, 607);
+            dgvOrders.TabIndex = 4;
+            dgvOrders.CellContentClick += dgvProducts_CellContentClick;
             // 
             // FormOrder
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(982, 653);
-            Controls.Add(dgvProducts);
+            Controls.Add(dgvOrders);
             Controls.Add(panelTop);
             Name = "FormOrder";
             Text = "FormOrder";
             panelTop.ResumeLayout(false);
             panelTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvProducts).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOrders).EndInit();
             ResumeLayout(false);
         }
 
@@ -121,6 +121,6 @@
         private Panel panelTop;
         private Label lblUserName;
         private Button btn_logout;
-        private DataGridView dgvProducts;
+        private DataGridView dgvOrders;
     }
 }

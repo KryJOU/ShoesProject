@@ -44,8 +44,11 @@ namespace ShoesProject
                             }
                             if (chooseForm.Choose == 1)
                             {
-                                MessageBox.Show("Тут форма заказов");
-                                continue;
+                                using (var formOrders = new FormOrder(formLogin.CurrentUser, formLogin.IsGuest))
+                                {
+                                    formOrders.ShowDialog();
+                                    continue;
+                                }
                             }
                         }
                         exitProgram = true;
