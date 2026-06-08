@@ -15,21 +15,16 @@ namespace ShoesProject
         public FormOrder(User user, bool guest)
         {
             InitializeComponent();
+            dgvOrders.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
-            var dateOrder = new DataGridViewTextBoxColumn { Name = "dateOrder", HeaderText = "Дата заказа", FillWeight = 30 };
-            var dateDelivery = new DataGridViewTextBoxColumn { Name = "dateDelivery", HeaderText = "Дата доставки", FillWeight = 30 };
-            var delivery = new DataGridViewTextBoxColumn { Name = "delivery", HeaderText = "Пункт выдачи", FillWeight = 40 };
+            var Order = new DataGridViewTextBoxColumn { Name = "Order", HeaderText = "Информация о заказе", FillWeight = 100 };
+            var DeliveryDate = new DataGridViewTextBoxColumn { Name = "DeliveryDate", HeaderText = "Дата доставки", FillWeight = 100 };
 
-            var UserName = new DataGridViewTextBoxColumn { Name = "UserName", HeaderText = "ФИО клиента", FillWeight = 60 };
-            UserName.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            var Status = new DataGridViewTextBoxColumn { Name = "status", HeaderText = "Статус", FillWeight = 20 };
-            dgvOrders.Columns.AddRange(new DataGridViewColumn[] { dateOrder, dateDelivery, delivery, UserName, Status });
+            dgvOrders.Columns.AddRange(new DataGridViewColumn[] { Order, DeliveryDate });
 
             CurrentUser = user;
             IsGuest = guest;
             lblUserName.Text = IsGuest ? "Гость" : CurrentUser.FullName;
-
             LoadOrders();
         }
 
@@ -40,9 +35,10 @@ namespace ShoesProject
                 using (var db = new ShopDbContext())
                 {
                     var orders = db.Orders
-                        .Include(o => o.IdDeliveryPointNavigation)
-                        .Include(o => o.User)
-                        .ToList();
+                     .Include(o => o.IdDeliveryPointNavigation)
+                     .Include(o => o.User)
+                     .Include(o => o.Status)
+                     .ToList();
 
                     dgvOrders.SuspendLayout();
                     dgvOrders.Rows.Clear();
@@ -51,14 +47,11 @@ namespace ShoesProject
                     {
                         int rowIndex = dgvOrders.Rows.Add();
                         var row = dgvOrders.Rows[rowIndex];
-
-                        row.Cells["dateOrder"].Value = order.OrderDate;
-                        row.Cells["dateDelivery"].Value = order.DeliveryDate;
-
-                        row.Cells["delivery"].Value = order.IdDeliveryPointNavigation?.DeliveryAddress ?? "Не указан";
-
-                        row.Cells["UserName"].Value = order.User?.FullName ?? "Гость";
-                        row.Cells["status"].Value = order.Status;
+                        row.Cells["Order"].Value = $"{order.Id}"
+                            + Environment.NewLine + $"{order.Status?.StatusName ?? "Не определен"}"
+                            + Environment.NewLine + $"{order.IdDeliveryPointNavigation?.DeliveryAddress ?? "Не указан"}"
+                            + Environment.NewLine + $"{order.OrderDate}";
+                        row.Cells["DeliveryDate"].Value = $"{order.DeliveryDate}";
                     }
 
                     dgvOrders.ResumeLayout();

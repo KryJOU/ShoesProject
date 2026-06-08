@@ -7,7 +7,6 @@ namespace ShoesProject
 {
     public partial class FormProducts : Form
     {
-
         public User CurrentUser { get; private set; }
         public bool IsGuest { get; private set; }
 
@@ -42,7 +41,6 @@ namespace ShoesProject
             lblUserName.Text = IsGuest ? "Гость" : CurrentUser.FullName;
 
             LoadProducts();
-
         }
 
         private void LoadProducts()
@@ -55,8 +53,9 @@ namespace ShoesProject
                         .Include(i => i.Manufacturer)
                         .Include(i => i.Supplier)
                         .Include(i => i.Measure)
-                        .Include(i=> i.ProductType)
+                        .Include(i => i.ProductType)
                         .ToList();
+
                     dgvProducts.SuspendLayout();
                     dgvProducts.Rows.Clear();
 
@@ -66,9 +65,7 @@ namespace ShoesProject
                         var row = dgvProducts.Rows[rowIndex];
 
                         row.Cells["colPhoto"].Value = LoadProductImage(product.PhotoUrl);
-
                         row.Cells["colInfo"].Value = FormatProductInfo(product);
-
                         row.Cells["colDiscount"].Value = $"{product.Discount}%";
                         row.Cells["colDiscount"].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
@@ -105,13 +102,13 @@ namespace ShoesProject
             if (product.Discount > 0)
             {
                 row.Cells["colDiscount"].Style.ForeColor = Color.Red;
+
                 row.Cells["colDiscount"].Style.Font = new Font(
-                    "Times Nes Roman",
+                    "Times New Roman",
                     12,
                     FontStyle.Bold
-                    );
+                );
             }
-
         }
 
         private string FormatProductInfo(Product product)
@@ -120,11 +117,11 @@ namespace ShoesProject
             if (product.Discount > 0)
             {
                 decimal FinalPrice = product.Price * (100 - product.Discount) / 100;
-                priceText = $"Цена: {product.Price:C} -> {FinalPrice: C}"; ;
+                priceText = $"{product.Price:C} -> {FinalPrice:C}";
             }
             else
             {
-                priceText = $"Цена: {product.Price:C}";
+                priceText = $"{product.Price:C}";
             }
 
             return $"{product.Category.CategoryName} | {product.ProductType.ProdType}" + Environment.NewLine +
@@ -138,12 +135,24 @@ namespace ShoesProject
 
         private Image LoadProductImage(string photoUrl)
         {
-            if (!string.IsNullOrEmpty(photoUrl) && System.IO.File.Exists(photoUrl))
+            if (string.IsNullOrEmpty(photoUrl))
             {
-                return Image.FromFile(photoUrl);
+                return Properties.Resources.picture;
             }
 
-            return Resources.picture;
+            try
+            {
+                string resourceName = Path.GetFileNameWithoutExtension(photoUrl).Trim();
+                var rm = Properties.Resources.ResourceManager;
+
+                var img = rm.GetObject(resourceName) as Image;
+
+                return img ?? Properties.Resources.picture;
+            }
+            catch (Exception)
+            {
+                return Properties.Resources.picture;
+            }
         }
 
         private void btnlogout_Click(object sender, EventArgs e)

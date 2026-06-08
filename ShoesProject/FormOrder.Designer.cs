@@ -78,6 +78,7 @@
             dgvOrders.AllowUserToAddRows = false;
             dgvOrders.AllowUserToDeleteRows = false;
             dgvOrders.Anchor = AnchorStyles.Left;
+            dgvOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvOrders.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvOrders.BackgroundColor = Color.White;
             dgvOrders.BorderStyle = BorderStyle.None;
@@ -109,7 +110,7 @@
             Controls.Add(dgvOrders);
             Controls.Add(panelTop);
             Name = "FormOrder";
-            Text = "FormOrder";
+            Text = "Форма заказов";
             panelTop.ResumeLayout(false);
             panelTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvOrders).EndInit();
